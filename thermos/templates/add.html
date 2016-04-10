@@ -8,8 +8,28 @@
 <section>
     <h1>Add url</h1>
     <article>
-        <form action="" method="post">
-            <p>Enter your Url: <input type="text" name="url" placeholder="Type in the url"> </p>
+        <form action="" method="post" novalidate>
+            {{form.hidden_tag()}}
+            <table>
+                <tr {% if form.url.errors %}  class="error"  {% endif %}>
+                    <td>Enter Url to bookmark</td>
+                    <td>{{ form.url(size="50") }}</td>
+                </tr>
+                <tr class="error">
+                    <td></td>
+                    <td>
+                        <ul>
+                            {% for error in form.url.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Add optional description of url</td>
+                    <td>{{ form.description(size="50") }}</td>
+                </tr>
+            </table>
             <p><button type="submit">Submit</button></p>
         </form>
     </article>
