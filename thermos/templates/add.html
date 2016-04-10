@@ -1,16 +1,24 @@
 {% extends 'base.html' %}
+{% from "form_macro.html" import render_field %}
 
 {% block title %}
-    <title>Add Url Form</title>
+    Add Url Form
 {% endblock %}
 
 {% block content %}
 <section>
     <h1>Add url</h1>
     <article>
-        <form action="post">
-            <p>Enter your Url: <input type="text" placeholder="Type in the url"> </p>
-            <p><button type="submit">Submit</button></p>
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <table>
+                {{ render_field(form.url, size=50) }}
+                {{ render_field(form.description, size=50) }}
+                <tr class="submit">
+                    <td></td>
+                    <td><button type="submit">Submit</button></td>
+                </tr>
+            </table>
         </form>
     </article>
 </section>
