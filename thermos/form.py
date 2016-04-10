@@ -5,8 +5,8 @@ from wtforms.validators import DataRequired, url
 
 
 class BookmarkForm(Form):
-    url = URLField('url', validators=[DataRequired(), url()])
-    description = StringField('description')
+    url = URLField('Add url to Bookmark', validators=[DataRequired(), url()])
+    description = StringField('Add optional description')
 
     def validate(self):
         if not self.url.data.startswith('http://') or \

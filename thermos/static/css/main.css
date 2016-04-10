@@ -58,6 +58,7 @@ textarea {
 
 body {
     font: 16px/26px Helvetica, Helvetica Neue, Arial;
+    height:100%;
 }
 
 .wrapper {
@@ -175,6 +176,17 @@ color:#1e5373}
 .main .aside h3, footer h3{
     color:white
 }
+.main-wrapper {
+    min-height: 100%;
+}
+
+/* .footer-container{
+    position: relative;
+    height: 60px;
+    margin-bottom: 0;
+    text-align: center;
+
+} */
 
 /*   Flash messages */
    .flashes ul {
