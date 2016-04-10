@@ -176,7 +176,20 @@ color:#1e5373}
     color:white
 }
 
+/*   Flash messages */
+   .flashes ul {
+        color:#000;
+        background: #FFD6A3;
+        list-style-type: none;
+        list-style: none;
+        margin: 0 0;
+   }
 
+   
+
+   article.flashes {
+        margin-bottom: 1em;
+   }
 
 
 /* ==========================================================================
