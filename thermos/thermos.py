@@ -1,4 +1,5 @@
 import os
+import models
 from datetime import datetime
 from flask import Flask, flash, render_template, request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
@@ -21,31 +22,14 @@ class User:
         return '{}. {}'.format(self.firstname[0], self.lastname[0])
 
 
-def new_bookmarks(num):
-    return sorted(bookmarks, key=lambda bm: bm['date'], reverse=True)[:num]
-    
+# def new_bookmarks(num):
+#     return sorted(bookmarks, key=lambda bm: bm['date'], reverse=True)[:num]
+#
     
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html', title="Social Bookmarking", new_bookmarks=new_bookmarks(5))
-
-
-@app.route('/profile')
-def profile():
-    return render_template('profile.html')
-
-
-bookmarks = []
-
-
-def store_bookmarks(url, description):
-    bookmarks.append(dict(
-        url=url,
-        user='Rowland',
-        date=datetime.utcnow(),
-        description=description
-    ))
+    return render_template('index.html', title="Social Bookmarking", new_bookmarks=models.Bookmark(5))
 
 
 @app.route('/add', methods=['GET', 'POST'])
@@ -54,7 +38,9 @@ def add():
     if form.validate_on_submit():
         url = form.url.data
         description = form.description.data
-        store_bookmarks(url, description)
+        dm = models.Bookmark(url=url, description=description)
+        db.session.add(dm)
+        db.session.commit()
         flash('Stored {}'.format(description))
         return redirect(url_for('index'))
     return render_template('add.html', form=form)
